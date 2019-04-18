@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "next build && sls deploy",
+    "start": "next build && NODE_ENV=production node server.js",
+    "dev": "next build && NODE_ENV=local node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "aws-amplify": "^1.1.26",
+    "aws-sdk": "^2.437.0",
+    "compression": "^1.7.4",
+    "express": "^4.16.4",
+    "next": "^7.0.3",
+    "nodemon": "^1.18.11",
+    "path-match": "^1.2.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-domain-manager": "^3.2.1",
+    "serverless-http": "^2.0.0",
+    "url": "^0.11.0"
+  }
+}

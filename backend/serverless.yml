@@ -1,0 +1,62 @@
+service: good-boys-api
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
+functions:
+  breeds:
+    handler: lambdas/breeds.main
+    events:
+      - http:
+          path: breeds
+          method: get
+          cors: true
+  listAllGoodBoys:
+    handler: lambdas/goodBoys.main
+    events:
+      - http:
+          path: dogs
+          method: get
+          cors: true
+  justOneGoodBoy:
+    handler: lambdas/justOneGoodBoy.main
+    events:
+      - http:
+          path: dog/breed/{path}
+          method: get
+          cors: true
+  justOneGoodBoyByBreed:
+    handler: lambdas/justOneGoodBoyByBreed.main
+    events:
+      - http:
+          path: dog/{breed}/just-one
+          method: get
+          cors: true
+  dogBreedPictures:
+    handler: lambdas/dogBreedPictures.main
+    events:
+      - http:
+          path: dogs/{breed}
+          method: get
+          cors: true
+
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
